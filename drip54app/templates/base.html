@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block title %}{% endblock title %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/fontawesome.min.css">
+        <link rel="icon" href="{% static 'images/logo.png' %}">
+        
+        <script src="{% static 'js/main.js' %}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <section class="banner">
+                <img src="{% static 'images/banner.png' %}">
+            </section>
+            <section>
+                <nav class="navbar">
+                    <a class="navbar-brand" href="{% url 'home' %}">
+                        <div class="navbar-item">
+                            <img src="{% static 'images/logo.png' %}">
+                        </div>
+                    </a>
+                    <div class="navbar-menu">
+                        <div class="navbar-start">
+                            <div class="navbar-item">
+                                <form method="POST" action="{% url 'query' %}">
+                                    {% csrf_token %}
+                                    <p><input name="query" class="input" id="nav-search" placeholder="Search for drip" required>&nbsp;<button class="button" name="submit"><i class="fa fa-search" style="color: #000080;"></i></button></p>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="navbar-end">
+                            {% if request.user.is_authenticated %}
+                                <div class="navbar-item has-dropdown is-hoverable">
+                                    <a class="navbar-item">
+                                        <img src="{% static 'images/profile.jpg' %}" id="profile-image">&nbsp;<p>Hi {{ userprofile.firstname }}</p>
+                                    </a>
+                                    <div class="navbar-dropdown">
+                                        <a class="navbar-item" href="{% url 'cart' %}">
+                                            <div>
+                                                <span class="icon is-small">
+                                                    <i class="fa fa-tag"></i>
+                                                </span>
+                                                &nbsp; Cart
+                                            </div>
+                                        </a>
+                                        <a class="navbar-item" href="{% url 'wishlist' %}">
+                                            <div>
+                                                <span class="icon is-small">
+                                                    <i class="fa fa-heart"></i>
+                                                </span>
+                                                &nbsp; Wishlist
+                                            </div>
+                                        </a>
+                                        <a class="navbar-item" href="{% url 'orders' %}">
+                                            <div>
+                                                <span class="icon is-small">
+                                                    <i class="fa fa-check"></i>
+                                                </span>
+                                                &nbsp; Orders
+                                            </div>
+                                        </a>
+                                        <a class="navbar-item" href="{% url 'profile' %}">
+                                            <div>
+                                                <span class="icon is-small is-outlined">
+                                                    <i class="fa fa-user"></i>
+                                                </span>
+                                                &nbsp; Profile
+                                            </div>
+                                        </a>
+                                        <a class="navbar-item" href="{% url 'logout' %}">
+                                            <button class="button is-danger is-small">Sign Out</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="navbar-item">
+                                    <a class="navbar-item" href="{% url 'login' %}">
+                                        <button class="button is-light">Log In</button>
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </nav>
+            </section>
+            <section class="section">
+                <div class="container">
+                    <div class="columns">
+                        {% block content %}{% endblock content %}
+                    </div>
+                </div>
+            </section>
+        </div>
+        <script src="" async defer></script>
+    </body>
+</html>

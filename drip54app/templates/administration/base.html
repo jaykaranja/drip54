@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'css/bulma/css/bulma.css' %}"/>
+        <link rel="stylesheet" href="{% static 'css/administration.css' %}">
+    </head>
+    <body>
+      <div class="container">
+        <nav class="navbar"  role="navigation" aria-label="main navigation">
+          <div class="navbar-brand">
+            <a class="navbar-item" href="{% url 'administration' %}" >
+              <ul>
+                <li>              
+                  <p class="title is-4">
+                    Drip54
+                  </p>
+                </li>
+                <li>
+                  <p class="subtitle">Administration</p>
+                </li>
+              </ul>
+            </a>        
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+            </a>
+          </div>
+          <div class="navbar-menu">
+            <div class="navbar-start">
+              <a class="navbar-item">
+                <p>Home</p>
+              </a>
+            </div>
+            <div class="navbar-end">
+              <a class="navbar-item">
+                Profile
+              </a>
+              <a class="navbar-item">
+                Query Receipts
+              </a>
+              <a class="navbar-item">
+                Users
+              </a>
+            </div>
+          </div>
+        </nav>
+        <div class="main-content">
+          <div class="columns">
+            <div class="column is-2 is-hidden-mobile" id="aside">
+              <br>
+              <aside class="menu">
+                <p class="menu-label">
+                  General
+                </p>
+                <ul class="menu-list">
+                  <li><a>Dashboard</a></li>
+                  <li><a>Today's Receipts</a></li>
+                  <li><a>Bestsellers</a></li>
+                </ul>
+                <p class="menu-label">
+                  Administration
+                </p>
+                <ul class="menu-list">
+                  <li><a>Check progress</a></li>
+                  <li>
+                    <a>Various Sectors</a>
+                    <ul>
+                      <li><a>Sales</a></li>
+                      <li><a>HR</a></li>
+                      <li><a>Products</a></li>
+                    </ul>
+                  </li>
+                  <li><a>Authenticate a user to admin</a></li>
+                </ul>
+              </aside>
+            </div>
+            <div class="column">
+              <br>
+              {% block content %}{% endblock %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+</html>

@@ -1,0 +1,72 @@
+{% extends 'administration/base.html' %}
+{% block title %}Dashboard - Administration{% endblock %}
+{% block content %}
+<section class="info-tiles">
+    <div class="tile is-ancestor has-text-centered">
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+                <p class="title"><small>Kshs. {{ todayssales }}</small></p>
+                <p class="subtitle"><small>Today's sales</small></p>
+            </article>
+        </div>
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+                <p class="title"><small>Kshs. {{ monthsales }}</small></p>
+                <p class="subtitle"><small>This month's sales</small></p>
+            </article>
+        </div>
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+                <p class="title">{{ totalorders }}</p>
+                <p class="subtitle">Total orders</p>
+            </article>
+        </div>
+        <div class="tile is-parent">
+            <article class="tile is-child box">
+                <p class="title">{{ registeredusers }}</p>
+                <p class="subtitle">Registered users</p>
+            </article>
+        </div>
+    </div>
+</section>
+<section class="section">
+  <h1 class="title">Orders</h1>
+  <h2 class="subtitle">Recent Orders</h2>
+  <div class="container">
+      {% if recentorders %}
+      <table class="table" id="administration-table">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Date Ordered</th>
+            <th>Order Status</th>
+            <th>Order Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in recentorders %}
+          <tr>
+            <th>{{ order.order_number }}</th>
+            <td>{{ order.date_created }}</td>
+            <td>
+              {% if order.on_delivery %}
+              <button class="button is-small is-primary is-unselectable">On transit</button>
+              {% elif order.waiting_confirmation  %}
+                  <button class="button is-small is-warning is-unselectable">Waiting confirmation</button>
+              {% elif order.delivered %}
+                  <button class="button is-small is-warning is-unselectable">Delivered</button>
+              {% elif order.received %}
+                  <button class="button is-small is-success is-unselectable">Received</button>
+              {% endif %}
+            </td>
+            <td> Kshs. {{ order.total_amount }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <center><p>There's no recent orders made.</p></center>
+      {% endif %}
+  </div>
+</section>
+{% endblock %}

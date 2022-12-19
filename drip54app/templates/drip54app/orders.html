@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Orders | Drip54 {% endblock title %}
+{% block content %}
+<div class="column is-2 is-offset-1 is-hidden-mobile">
+  <div class="menu">
+      <button class="menu-label button" onclick=showbrands()>
+        Brands
+      </button>
+      <ul class="menu-list" id="brandlist" style="display: none;">
+          {% if brands %}
+              {% for brand in brands %}
+                  <li><a href="{% url 'brand' brand.id %}">{{ brand.brand_name }}</a></li>
+              {% endfor %}
+          {% endif %}
+      </ul>
+      <button class="menu-label button" onclick=showcategories()>
+        Categories
+      </button>
+      <ul class="menu-list" id="categories" style="display: none;">
+          {% if clothetypes %}
+              {% for clothetype in clothetypes %}
+                  <li><a href="{% url 'type' clothetype.id %}">{{ clothetype.clothtype }}</a></li>
+              {% endfor %}
+          {% endif %}
+      </ul>
+  </div>
+</div>
+<div class="column is-8">
+    <nav class="breadcrumb">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li class="is-active"><a>Orders</a></li>
+        </ul>
+    </nav>
+    {% if message %}
+    <div class="notification is-{{messagetype}} has-text-centered" id="notification">
+        <p>{{ message }} </p>
+    </div>
+    {% endif %}
+    <p class="title is-3">Orders</p>
+      {% if orders %}
+      <table class="table" style="width: 100%;">
+        <tr>
+          <td> Order Number  </td>
+          <td> Date ordered </td>
+          <td> Number of items </td>
+          <td> Status </td>
+        </tr>
+      {% for order in orders  %}
+        <tr id="itemrow">
+          <td><a href="{% url 'vieworder' order.order_number %}">{{ order.order_number }}</a></td>
+          <td> {{ order.date_created }} </td>
+          <td> {{ order.order_items.count }} </td>
+          <td>
+            <div class="container">
+            {% if order.on_delivery is True %}
+                <button class="button is-small is-primary is-unselectable">On transit</button>
+            {% elif order.waiting_confirmation is True %}
+                <button class="button is-small is-warning is-unselectable">Waiting confirmation</button>
+            {% elif order.delivered is True %}
+                <button class="button is-small is-warning is-unselectable">Delivered</button>
+            {% elif order.received is True %}
+                <button class="button is-small is-success is-unselectable">Received</button>
+            {% endif %}
+            </div>
+          </td>
+        </tr>
+      {% endfor %}
+      </table>
+      {% else %}
+      <p class="subtitle has-text-centered">You have no orders yet.</p>
+      {% endif %}
+    </table>
+    <br>
+</div>
+{% endblock content %}

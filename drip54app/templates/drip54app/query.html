@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} "{% if query %}{{ query }}{% endif %}" | Drip54 {% endblock title %}
+{% block content %}
+<div class="column is-2 is-offset-1 is-hidden-mobile">
+  <div class="menu">
+      <button class="menu-label button" onclick=showbrands()>
+        Brands
+      </button>
+      <ul class="menu-list" id="brandlist" style="display: none;">
+          {% if brands %}
+              {% for brand in brands %}
+                  <li><a href="{% url 'brand' brand.id %}">{{ brand.brand_name }}</a></li>
+              {% endfor %}
+          {% endif %}
+      </ul>
+      <button class="menu-label button" onclick=showcategories()>
+        Categories
+      </button>
+      <ul class="menu-list" id="categories" style="display: none;">
+          {% if clothetypes %}
+              {% for clothetype in clothetypes %}
+                  <li><a href="{% url 'type' clothetype.id %}">{{ clothetype.clothtype }}</a></li>
+              {% endfor %}
+          {% endif %}
+      </ul>
+  </div>
+</div>
+<div class="column is-8">
+    <nav class="breadcrumb">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li class="is-active"><a>Search</a></li>
+            <li><a class="is-unselectable">{% if query %}"{{ query }}"{% endif %}</a></li>
+        </ul>
+    </nav>
+    {% if message %}
+    <div class="notification is-danger has-text-centered" id="notification">
+        <p>{{ message }} </p>
+    </div>
+    {% endif %}
+    <p class="title is-4">Products matching "{% if query %}{{ query }}{% endif %}"</p>
+      {% if products %}
+      <table class="table" style="width: 100%;">
+        <tr>
+          <td>  </td>
+          <td> Item </td>
+          <td> Brand </td>
+          <td> Price </td>
+          <td> Actions </td>
+        </tr>
+      {% for product in products  %}
+        <tr id="itemrow">
+          <td>         
+            <figure class="media">
+              <a class="image" href="{% url 'product' product.id %}">
+                <img id="cart-thumbnail" src="{{ product.product_image.url }}">
+              </a>
+            </figure>
+          </td>
+          <td> {{ product.product_name }} </td>
+          <td> {{ product.product_brand.brand_name }} </td>
+          <td> Ksh. {{ product.product_price }} </td>
+          <td>    
+            <a class="button is-small is-outlined is-success" href="{% url 'addtocart' product.id %}"><i class="fa fa-plus"></i></a>
+          </td>
+        </tr>
+      {% endfor %}
+      </table>
+      {% else %}
+        <center><p>Sorry. None of items matched "{% if query %}{{ query }}{% endif %}"</p></center>
+      {% endif %}
+    </table>
+    <br>
+</div>
+{% endblock content %}

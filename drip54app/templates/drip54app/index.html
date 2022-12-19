@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Drip54 | Drip Kings{% endblock title %}
+{% block content %}
+<div class="column is-2 is-hidden-mobile">
+    <div class="menu">
+        <button class="menu-label button" onclick=showbrands()>
+          Brands
+        </button>
+        <ul class="menu-list" id="brandlist" style="display: none;">
+            {% if brands %}
+                {% for brand in brands %}
+                    <li><a href="{% url 'brand' brand.id %}">{{ brand.brand_name }}</a></li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+        <button class="menu-label button" onclick=showcategories()>
+          Categories
+        </button>
+        <ul class="menu-list" id="categories" style="display: none;">
+            {% if clothetypes %}
+                {% for clothetype in clothetypes %}
+                    <li><a href="{% url 'type' clothetype.id %}">{{ clothetype.clothtype }}</a></li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+</div>
+<div class="column is-8">
+    <div class="container">
+        <div class="container">
+            <nav class="level">
+                <div class="level-left">
+                    <p class="menu-label">
+                        Shoes
+                    </a>
+                </div>
+            </nav>
+            <div class="columns is-multiline">
+                {% if products %}
+                    {% for product in products %}
+                        {% if product.product_type.id == 13 %}
+                        <div class="column is-3" id="product-card">
+                            <a href="{% url 'product' product.id %}" href="{% url 'product' product.id %}"><img id="indeximage" src="{{ product.product_image.url }}"></a>
+                            <p><strong>{{ product.product_name }}</strong></p>
+                            <p>Kshs. {{ product.product_price }}</p>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <br>
+        <div class="container">
+            <nav class="level">
+                <div class="level-left">
+                    <p class="menu-label">
+                        Slingbags
+                    </a>
+                </div>
+            </nav>
+            <div class="columns is-multiline">
+                {% if products %}
+                    {% for product in products %}
+                        {% if product.product_type.id == 16 %}
+                        <div class="column is-3" id="product-card">
+                            <a href="{% url 'product' product.id %}" href="{% url 'product' product.id %}"><img id="indeximage" src="{{ product.product_image.url }}"></a>
+                            <p><strong>{{ product.product_name }}</strong></p>
+                            <p>Kshs. {{ product.product_price }}</p>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <br>
+        <div class="container">
+            <nav class="level">
+                <div class="level-left">
+                    <p class="menu-label">
+                        Sweatpants
+                    </a>
+                </div>
+            </nav>
+            <div class="columns is-multiline">
+                {% if products %}
+                    {% for product in products %}
+                        {% if product.product_type.id == 11 %}
+                        <div class="column is-3" id="product-card">
+                            <a href="{% url 'product' product.id %}" href="{% url 'product' product.id %}"><img id="indeximage" src="{{ product.product_image.url }}"></a>
+                            <p><strong>{{ product.product_name }}</strong></p>
+                            <p>Kshs. {{ product.product_price }}</p>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <br>
+        <div class="container">
+            <nav class="level">
+                <div class="level-left">
+                    <p class="menu-label">
+                        Jackets
+                    </a>
+                </div>
+            </nav>
+            <div class="columns is-multiline">
+                {% if products %}
+                    {% for product in products %}
+                        {% if product.product_type.id == 6 %}
+                        <div class="column is-3" id="product-card">
+                            <a href="{% url 'product' product.id %}" href="{% url 'product' product.id %}"><img id="indeximage" src="{{ product.product_image.url }}"></a>
+                            <p><strong>{{ product.product_name }}</strong></p>
+                            <p>Kshs. {{ product.product_price }}</p>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <br>
+        <div class="container">
+            <nav class="level">
+                <div class="level-left">
+                    <p class="menu-label">
+                        Sweatshirts
+                    </a>
+                </div>
+            </nav>
+            <div class="columns is-multiline">
+                {% if products %}
+                    {% for product in products %}
+                        {% if product.product_type.id == 4 %}
+                        <div class="column is-3" id="product-card">
+                            <a href="{% url 'product' product.id %}" href="{% url 'product' product.id %}"><img id="indeximage" src="{{ product.product_image.url }}"></a>
+                            <p><strong>{{ product.product_name }}</strong></p>
+                            <p>Kshs. {{ product.product_price }}</p>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

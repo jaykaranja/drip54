@@ -1,0 +1,47 @@
+{% load crispy_forms_tags %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block title %} Log In | Drip54 {% endblock title %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/fontawesome.min.css">
+        
+    </head>
+    <body>
+        <div class="container">
+            <section class="banner">
+                <img src="{% static 'images/banner.png' %}">
+            </section>
+            <br>
+            <section>
+                <div class="container has-text-centered">
+                    <div class="column is-4 is-offset-4">
+                        <img src="{% static 'images/logo.png' %}">
+                        <p class="title has-text-black">Log In</p>
+                        <p>Please enter your details here.</p>
+                        <br>
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <br>
+                            <button class="button is-success is-outlined" name="submit">Log In</button>
+                            <br> <br>
+                            <p> Not yet a user? Register <a href="{% url 'signup' %}">here</a><p> 
+                        </form>
+                        <div class="footer" style="font-size:13px">
+                            <a><small>Forgot password</small></a> | <a><small>Legal Information</small></a> | <a><small>Help and Contact Center</small></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <script src="" async defer></script>
+    </body>
+</html>

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ brand.brand_name }} | Drip54 {% endblock title %}
+{% block content %}
+<div class="column is-2 is-offset-1 is-hidden-mobile">
+    <div class="menu">
+        <button class="menu-label button" onclick=showbrands()>
+          Brands
+        </button>
+        <ul class="menu-list" id="brandlist" style="display: none;">
+            {% if brands %}
+                {% for brand in brands %}
+                    <li><a href="{% url 'brand' brand.id %}">{{ brand.brand_name }}</a></li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+        <button class="menu-label button" onclick=showcategories()>
+          Categories
+        </button>
+        <ul class="menu-list" id="categories" style="display: none;">
+            {% if clothetypes %}
+                {% for clothetype in clothetypes %}
+                    <li><a href="{% url 'type' clothetype.id %}">{{ clothetype.clothtype }}</a></li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+</div>
+<div class="column is-8">
+    <div class="container">
+        <div class="container">
+            <nav class="level">
+                <div class="level-left">
+                    <p class="menu-label is-4">
+                        {{ brand.brand_name }}
+                    </a>
+                </div>
+            </nav>
+            <div class="columns is-multiline">
+                {% if products %}
+                    {% for product in products %}
+                        <div class="column is-2" id="product-card">
+                            <a href="{% url 'product' product.id %}" href="{% url 'product' product.id %}"><img id="indeximage" src="{{ product.product_image.url }}"></a>
+                            <p><strong>{{ product.product_name }}</strong></p>
+                            <p>Kshs. {{ product.product_price }}</p>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

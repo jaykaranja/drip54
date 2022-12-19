@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow&display=swap');
+
+* {
+    font-family: 'Archivo Narrow', sans-serif;
+}
+
+.navbar-end .navbar-item:hover {
+    color: lightslategray;
+    transition-duration: 0.5s;
+}
+
+.navbar-start .navbar-item:hover {
+    color: lightslategray;
+    transition-duration: 0.5s;
+}
+
+#administration-table {
+    width: 100%;
+}
+
+.main-content {
+    border-top: 1px solid #000080;
+}
+
+#aside {
+    border-right: 1px solid #000080;
+}

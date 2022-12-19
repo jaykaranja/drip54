@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow&display=swap');
+
+* {
+    font-family: 'Archivo Narrow', sans-serif;
+}
+
+#nav-search {
+    width: 270px;
+    margin-left: 120px;
+}
+
+.navbar-brand {
+    margin-left: 50px;
+}
+
+#profile-image {
+    border-radius: 100%;
+}
+
+
+.has-dropdown {
+    margin-right: 50px;
+}
+
+#cart-icon{
+    color: white;
+}
+
+#itemrow:hover #cart-icon  {
+    color: #000080;
+}
+
+.hero.is-success {
+    background-color: aliceblue;
+}
+
+#indeximage {
+    height: 150px;
+    width: 150px;
+}
+
+#cart-thumbnail {
+    height:90px;
+    width:70px;
+}
+
+#detailimage {
+    width:300px; 
+    height:400px;
+}
+
+#detailtitle {
+    color: #000080;
+}
+
+#product-card {
+    font-size: 12px;
+}
+
+table tr td {
+    font-size:13px;
+}

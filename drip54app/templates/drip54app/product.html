@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ product.product_name}} - Drip54{% endblock title %}
+{% block content %}
+<div class="column is-2 is-offset-1 is-hidden-mobile">
+    <div class="menu">
+        <button class="menu-label button" onclick=showbrands()>
+          Brands
+        </button>
+        <ul class="menu-list" id="brandlist" style="display: none;">
+            {% if brands %}
+                {% for brand in brands %}
+                    <li><a href="{% url 'brand' brand.id %}">{{ brand.brand_name }}</a></li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+        <button class="menu-label button" onclick=showcategories()>
+          Categories
+        </button>
+        <ul class="menu-list" id="categories" style="display: none;">
+            {% if clothetypes %}
+                {% for clothetype in clothetypes %}
+                    <li><a href="{% url 'type' clothetype.id %}">{{ clothetype.clothtype }}</a></li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+</div>
+<div class="column is-8">
+    <nav class="breadcrumb">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a>Products</a></li>
+            <li><a href="{% url 'brand' product.product_brand.id %}">{{ product.product_brand.brand_name }}</a></li>
+            <li class="is-active"><a>{{ product.product_name }}</a></li>
+        </ul>
+    </nav>
+    {% if product %}
+    <div class="columns">
+        <div class="column is-5">
+            <img src="{{ product.product_image.url }}" id="detailimage">
+        </div>
+        <div class="column">
+            <br>
+            <p class="title is-4">{{ product.product_name }}<p>
+            
+            <p class="title is-5"><small>{{ product.product_brand.brand_name }}</small></p>
+
+            <p class="title is-5"><small>{{ product.product_type.clothtype }}</small></p>
+            
+            <p class="title is-5"><small>Kshs. {{ product.product_price }}</small></p>
+            <br><br><br><br><br><br><br><br>
+            <nav class="level">
+                <div class="level-left"></div>
+                <div class="level-right">
+                    <div class="level-item">
+                        <a class="button is-danger is-outlined" href="{% url 'addtowishlist' product.id %}"><i class="fa fa-heart"></i></a>
+                    </div>
+                    <a class="button is-success is-outlined"  href="{% url 'addtocart' product.id %}">Add to cart</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <br>
+    <div id="description">
+        <p class="title is-5" id="detailtitle">Description</p>
+        <p><small> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do 
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Accumsan lacus
+            vel facilisis volutpat est velit egestas. Sapien eget mi proin sed. Sit 
+            amet mattis vulputate enim.</small></p>
+    </div>
+    <br>
+    <div id="ratings">
+        <p class="title is-5" id="detailtitle">Product ratings and comments</p>
+        <article class="media">
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                    <small>@johnsmith</small> <small>31m</small>
+                    <br>
+                    <small>Airforces are never underated!</small>
+                    </p>
+                </div>
+            </div>
+        </article>
+        <article class="media">
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                    <small>@johnsmith</small> <small>31m</small>
+                    <br>
+                    <small>great shoes. I love them</small>
+                    </p>
+                </div>
+            </div>
+        </article>
+        <article class="media">
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                    <small>@johnsmith</small> <small>31m</small>
+                    <br>
+                    <small>Just delivered, no complaints at all.</small>
+                    </p>
+                </div>
+            </div>
+        </article>
+        <article class="media">
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                    <small>@johnsmith</small> <small>31m</small>
+                    <br>
+                    <small>drip54 are just amazing when it comes to authenticity</small>
+                    </p>
+                </div>
+            </div>
+        </article>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}

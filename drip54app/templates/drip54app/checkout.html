@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Checkout | Drip54 {% endblock title %}
+{% block content %}
+<div class="column is-2 is-offset-1 is-hidden-mobile">
+  <div class="menu">
+      <button class="menu-label button" onclick=showbrands()>
+        Brands
+      </button>
+      <ul class="menu-list" id="brandlist" style="display: none;">
+          {% if brands %}
+              {% for brand in brands %}
+                  <li><a href="{% url 'brand' brand.id %}">{{ brand.brand_name }}</a></li>
+              {% endfor %}
+          {% endif %}
+      </ul>
+      <button class="menu-label button" onclick=showcategories()>
+        Categories
+      </button>
+      <ul class="menu-list" id="categories" style="display: none;">
+          {% if clothetypes %}
+              {% for clothetype in clothetypes %}
+                  <li><a href="{% url 'type' clothetype.id %}">{{ clothetype.clothtype }}</a></li>
+              {% endfor %}
+          {% endif %}
+      </ul>
+  </div>
+</div>
+<div class="column is-8">
+    <nav class="breadcrumb">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li class="is-active"><a>Checkout</a></li>
+        </ul>
+    </nav>
+    {% if message %}
+    <div class="notification is-{{messagetype}} has-text-centered" id="notification">
+        <p>{{ message }} </p>
+    </div>
+    {% endif %}
+    <nav class="level">
+      <div class="level-left">
+        <div class="level-item">
+          <p class="title is-3">Checkout</p>
+        </div>
+      </div>
+      <div class="level-right">
+        <div class="level-item">
+          <a href="{% url 'order' %}"><button class="button is-success is-outlined is-small">Checkout&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"></i></button></a>
+        </div>
+      </div>
+    </nav>
+    <br>
+      {% if checkout %}
+      <table class="table" style="width: 100%;">
+        <tr>
+          <td>  </td>
+          <td> Item </td>
+          <td> Brand </td>
+          <td> Price </td>
+          <td> Number of items </td>
+          <td> Actions </td>
+        </tr>
+      {% for product in checkout %}
+        <tr id="itemrow">
+          <td>         
+            <figure class="media">
+              <a class="image" href="{% url 'product' product.item.id %}">
+                <img id="cart-thumbnail" src="{{ product.item.product_image.url }}">
+              </a>
+            </figure>
+          </td>
+          <td> {{ product.item.product_name }} </td>
+          <td> {{ product.item.product_brand.brand_name }} </td>
+          <td> Ksh. {{ product.item.product_price }} </td>
+          <td> {{ product.count }} </td>
+          <td></td>
+        </tr>
+      {% endfor %}
+      </table>
+      {% else %}
+      <p class="subtitle has-text-centered">Add items to your wishlist to see them here.</p>
+      {% endif %}
+    </table>
+    <br>
+</div>
+{% endblock content %}
